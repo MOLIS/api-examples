@@ -1,0 +1,36 @@
+<!doctype>
+<html>
+	<head>
+		<title>MOLIS Very Simple Upload</title>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				var url = "http://<molis-tdl>/api/v1/images?token=YOUR_TOKEN";
+				$("#ok").click(function(){
+					var file = $("#fileupload")[0].files[0];
+
+					var data = new FormData();
+					data.append("file1", $("#fileupload")[0].files[0]);
+
+					$.ajax({
+						type:"POST",
+						url:url,
+						data:data,
+						contentType:false,
+						cache:false,
+						processData:false,
+						success:function(data){
+							console.log(data);
+						}
+					});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div>
+			<input id="fileupload" type="file" name="files" multiple>
+			<button id="ok">OK</button>
+		</div>
+	</body>
+</html>
