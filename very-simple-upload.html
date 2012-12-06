@@ -6,11 +6,12 @@
 		<script>
 			$(document).ready(function(){
 				var url = "http://api.molis.io/v1/images?token=YOUR_TOKEN";
-				$("#ok").click(function(){
-					var file = $("#fileupload")[0].files[0];
+				$("form").submit(function(evt){
+					evt.preventDefault();
 
 					var data = new FormData();
-					data.append("file-1", $("#fileupload")[0].files[0]);
+					data.append("file-1", $("input[name=img]")[0].files[0]);
+					data.append("file-1-raw", $("input[name=raw]")[0].files[0]);
 
 					$.ajax({
 						type:"POST",
@@ -28,9 +29,12 @@
 		</script>
 	</head>
 	<body>
-		<div>
-			<input id="fileupload" type="file" name="files" multiple>
-			<button id="ok">OK</button>
-		</div>
+		<form>
+			Image file:
+			<input id="fileupload" type="file" name="img">
+			Raw file (optional):
+			<input id="fileupload" type="file" name="raw">
+			<button type="submit">Upload</button>
+		</form>
 	</body>
 </html>
